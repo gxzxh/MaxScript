@@ -1,5 +1,4 @@
 (
-	--²»ÄÜÔÚ×óÀ¨ºÅºóÃæÌí¼Ó×¢ÊÍ£¬Èç if True then(--²âÊÔ
 	Global Roll_MxsFormat
 	try DestroyDialog Roll_MxsFormat catch()
 	Global _KeyWords=#("if","while","for","of", "do", "else","then","collect","function", "fn")
@@ -8,51 +7,51 @@
 	global _InFile, _OutFile,_myStringStream
 	local _InFileName=""
 	local _TABS=0
-	local _×óÀ¨ºÅÊýÁ¿=0
-	local  _ÐÐÎ²ÊÇ¶ººÅ=false
+	local _å·¦æ‹¬å·æ•°é‡=0
+	local  _è¡Œå°¾æ˜¯é€—å·=false
 	local _LastIsWord=false
-	local _µ¥ÐÐÓÒÀ¨ºÅ=false
-	local _isCommentLine=false--ÊÇ·ñÎª×¢ÊÍÐÐ
+	local _å•è¡Œå³æ‹¬å·=false
+	local _isCommentLine=false--æ˜¯å¦ä¸ºæ³¨é‡Šè¡Œ
 	local Fn_getWord, Fn_MxsFormat , GetFileAll, Fn_SetdotNetControlstyle
 	-----------------------------------------------------------------
-	rollout Roll_MxsFormat "½Å±¾¸ñÊ½»¯¹¤¾ß 0.3" Width:300(
-		dotNetControl btn_MxsFormat "System.Windows.Forms.button" text:"Ö´ÐÐ½Å±¾¸ñÊ½»¯" Width:290 height:60 Align:#Center
-		Button Btn_»ñÈ¡ÎÄ¼þÁÐ±í "¡¾»ñÈ¡½Å±¾ÎÄ¼þ¡¿" Width:170 Height:40
-		Label Label04 "¹²Ñ¡Ôñ 0 ¸öÎÄ¼þ" offset:[70,0]
-		MultiListbox ÎÄ¼þÁÐ±í¿ò "" Width:290  height:26 Items:#()  align:#center
+	rollout Roll_MxsFormat "è„šæœ¬æ ¼å¼åŒ–å·¥å…· 0.3" Width:300(
+		dotNetControl btn_MxsFormat "System.Windows.Forms.button" text:"æ‰§è¡Œè„šæœ¬æ ¼å¼åŒ–" Width:290 height:60 Align:#Center
+		Button Btn_èŽ·å–æ–‡ä»¶åˆ—è¡¨ "ã€èŽ·å–è„šæœ¬æ–‡ä»¶ã€‘" Width:170 Height:40
+		Label Label04 "å…±é€‰æ‹© 0 ä¸ªæ–‡ä»¶" offset:[70,0]
+		MultiListbox æ–‡ä»¶åˆ—è¡¨æ¡† "" Width:290  height:26 Items:#()  align:#center
 		on btn_MxsFormat Click e do(
 			for filename in _FileListSet do(
 					Fn_MxsFormat  filename	
 			)
-			messagebox ("¹²´¦ÀíÎÄ¼þ£º"+_FileListSet.Count	 as string +" ¸ö¡£")			
+			messagebox ("å…±å¤„ç†æ–‡ä»¶ï¼š"+_FileListSet.Count	 as string +" ä¸ªã€‚")			
 		)
 		on Roll_MxsFormat open do(
 			Fn_SetdotNetControlstyle Roll_MxsFormat 16
 		)
-		On ÎÄ¼þÁÐ±í¿ò Selected arg do(
-			label04.text="¹²Ñ¡ÔñÁË "+ÎÄ¼þÁÐ±í¿ò.selection.NumberSet as string +" ¸öÎÄ¼þ"
+		On æ–‡ä»¶åˆ—è¡¨æ¡† Selected arg do(
+			label04.text="å…±é€‰æ‹©äº† "+æ–‡ä»¶åˆ—è¡¨æ¡†.selection.NumberSet as string +" ä¸ªæ–‡ä»¶"
 		)
-		on ÎÄ¼þÁÐ±í¿ò doubleClicked arg do(
-			ÎÄ¼þÁÐ±í¿ò.selection=#{1..ÎÄ¼þÁÐ±í¿ò.Items.count}
+		on æ–‡ä»¶åˆ—è¡¨æ¡† doubleClicked arg do(
+			æ–‡ä»¶åˆ—è¡¨æ¡†.selection=#{1..æ–‡ä»¶åˆ—è¡¨æ¡†.Items.count}
 			_FileListSet=#(); Join _FileListSet _FileList
 			_FileSelCount=_FileListSet.Count
-			label04.text="¹²Ñ¡Ôñ "+ÎÄ¼þÁÐ±í¿ò.selection.NumberSet as string +" ¸öÎÄ¼þ"
+			label04.text="å…±é€‰æ‹© "+æ–‡ä»¶åˆ—è¡¨æ¡†.selection.NumberSet as string +" ä¸ªæ–‡ä»¶"
 		)
-		On ÎÄ¼þÁÐ±í¿ò Selectionend Do(
-			_FileListSet=For i in ÎÄ¼þÁÐ±í¿ò.selection Collect _FileList[I]
+		On æ–‡ä»¶åˆ—è¡¨æ¡† Selectionend Do(
+			_FileListSet=For i in æ–‡ä»¶åˆ—è¡¨æ¡†.selection Collect _FileList[I]
 			_FileSelCount=_FileListSet.Count
 		)
-		On Btn_»ñÈ¡ÎÄ¼þÁÐ±í pressed do (
-			Local ÁÙÊ±Ä¿Â¼=""
+		On Btn_èŽ·å–æ–‡ä»¶åˆ—è¡¨ pressed do (
+			Local ä¸´æ—¶ç›®å½•=""
 			_FileListSet=#(); _FileSelCount=0
-			_FileList=GetFileAll()--µ¥Ò»ÎÄ¼þ¼Ð
+			_FileList=GetFileAll()--å•ä¸€æ–‡ä»¶å¤¹
 			if _FileList.Count>0 then
-			ÁÙÊ±Ä¿Â¼=getFilenamePath _FileList[1]
-			ÎÄ¼þÁÐ±í¿ò.Items=for FileName in  _FileList Collect (filenameFromPath FileName)
-		)--On Btn_»ñÈ¡ÎÄ¼þÁÐ±í
+			ä¸´æ—¶ç›®å½•=getFilenamePath _FileList[1]
+			æ–‡ä»¶åˆ—è¡¨æ¡†.Items=for FileName in  _FileList Collect (filenameFromPath FileName)
+		)--On Btn_èŽ·å–æ–‡ä»¶åˆ—è¡¨
 	)
 	-----------------------------------------------------------------------------------
-	--º¯Êý¶¨Òå
+	--å‡½æ•°å®šä¹‰
 	-----------------------------------------------------------------------------------
 	Function Fn_SetdotNetControlstyle Roll FontSize=(
 		Local DotCtrlBackColor = (dotnetclass "System.Drawing.Color").fromARGB 0 128 128
@@ -67,32 +66,32 @@
 	)--SetdotNetControlstyle
 	------------------------------------------------------------------
 	Function  GetFileAll =(
-		Local ÎÄ¼þÀàÐÍ="½Å±¾ÎÄ¼þ(*.ms;*mcr)|*.ms; *.mcr"
-		Local TempFile=GetOpenFileName Caption:"ÇëÑ¡ÖÐ½Å±¾ÎÄ¼þ" Types:ÎÄ¼þÀàÐÍ Historycategory:"Openfile" Initialdir:(getdir #maxroot)
+		Local æ–‡ä»¶ç±»åž‹="è„šæœ¬æ–‡ä»¶(*.ms;*mcr)|*.ms; *.mcr"
+		Local TempFile=GetOpenFileName Caption:"è¯·é€‰ä¸­è„šæœ¬æ–‡ä»¶" Types:æ–‡ä»¶ç±»åž‹ Historycategory:"Openfile" Initialdir:(getdir #maxroot)
 		If TempFile==Undefined then return #()
-		Local L_FilePath=getFilenamePath TempFile --»ñÈ¡Â·¾¶
+		Local L_FilePath=getFilenamePath TempFile --èŽ·å–è·¯å¾„
 		Local L_FileType=getFilenameType TempFile
-		Local L_FileList=Getfiles(L_FilePath+ "/*"+L_FileType)  --»ñÈ¡ÎÄ¼þÁÐ±í
+		Local L_FileList=Getfiles(L_FilePath+ "/*"+L_FileType)  --èŽ·å–æ–‡ä»¶åˆ—è¡¨
 		Return (Sort L_FileList)
 	)--GetFileAll
 	---------------------------------------
 	Function Fn_MxsFormat FileName=(
-		--±¸·ÝÎÄ¼þ
+		--å¤‡ä»½æ–‡ä»¶
 		Local BakFileName=(getFilenamePath FileName)+(getFilenameFile FileName)+"_bak"+	(getFilenameType FileName)
 		if not (Copyfile FileName BakFileName) do(
-			Messagebox (FileName +"  ±¸·ÝÊ§°Ü£¡")
+			Messagebox (FileName +"  å¤‡ä»½å¤±è´¥ï¼")
 			return False
 		)
 		_myStringStream=stringStream ""
 		--_InFile=openFile FileName mode:"r"
 		_InFile=openFile BakFileName mode:"r"
-		--¿ªÊ¼¹ý³Ì 1
+		--å¼€å§‹è¿‡ç¨‹ 1
 		while (not eof _InFile) do(
-			--»ñÈ¡·Ç¿ÕÐÐ
+			--èŽ·å–éžç©ºè¡Œ
 			while (not eof _InFile)	do(
 				_inStr=trimLeft(trimRight ( readLine _InFile ))
 				if _inStr.count>0 do(
-					--Ìí¼ÓµÄÄÚÈÝ
+					--æ·»åŠ çš„å†…å®¹
 					_inStr=substituteString _inStr "%" "\%"
 					exit
 				)
@@ -108,47 +107,47 @@
 					Default:(format ("\n"+c) to:_myStringStream)
 				)
 			)else if (Fn_getWord _inStr pos:#L)=="else" then(
-				if not _µ¥ÐÐÓÒÀ¨ºÅ then format "\n"to:_myStringStream
+				if not _å•è¡Œå³æ‹¬å· then format "\n"to:_myStringStream
 				format _inStr to:_myStringStream
 			)else(
 				format ("\n"+_inStr) to:_myStringStream
 			)
-			_µ¥ÐÐÓÒÀ¨ºÅ= if  c==")" and len==1 then true else False
+			_å•è¡Œå³æ‹¬å·= if  c==")" and len==1 then true else False
 			_isCommentLine=if (substring _inStr 1 2)=="--" then true else False
 		)
 		format ("\n------------------------") to:_myStringStream
 		close  _InFile
 		seek _myStringStream 0
-		--¹ý³Ì 1 ½áÊø
+		--è¿‡ç¨‹ 1 ç»“æŸ
 		------------------------------
 		_OutFile=openFile FileName mode:"w"
 		if _OutFile==Undefined do(
-			Messagebox ("ÎÞ·¨Ð´ÈëÎÄ¼þ£º"+FileName)
+			Messagebox ("æ— æ³•å†™å…¥æ–‡ä»¶ï¼š"+FileName)
 			free _myStringStream
 			return False
 		)
 		_inStr=""
 		_isCommentLine=false
-		--¿ªÊ¼¹ý³Ì 2
+		--å¼€å§‹è¿‡ç¨‹ 2
 		do(
 			if not _isCommentLine then(
 				Local S=toLower (substring _inStr 1 5)
-				IF _inStr[1]==")" then (_×óÀ¨ºÅÊýÁ¿-=1)				
+				IF _inStr[1]==")" then (_å·¦æ‹¬å·æ•°é‡-=1)				
 			)
-			for i=1 to _×óÀ¨ºÅÊýÁ¿+_TABS+( _ÐÐÎ²ÊÇ¶ººÅ as integer) do format "\t" to:_OutFile
+			for i=1 to _å·¦æ‹¬å·æ•°é‡+_TABS+( _è¡Œå°¾æ˜¯é€—å· as integer) do format "\t" to:_OutFile
 			format (_inStr+"\n") to:_OutFile
 			_isCommentLine=if (substring _inStr 1 2)=="--" then true else False
 			if not _isCommentLine then(
-				if _inStr[_inStr.count]=="," then _ÐÐÎ²ÊÇ¶ººÅ = true else _ÐÐÎ²ÊÇ¶ººÅ=false
+				if _inStr[_inStr.count]=="," then _è¡Œå°¾æ˜¯é€—å· = true else _è¡Œå°¾æ˜¯é€—å·=false
 				Local Index = _inStr.count
-				if _inStr[Index]=="(" do _×óÀ¨ºÅÊýÁ¿+=1
+				if _inStr[Index]=="(" do _å·¦æ‹¬å·æ•°é‡+=1
 				Index = findString _inStr "--"
 				if index != undefined and index >1 then(
 					index -= 1
 					while (index>1)do(
 						if _inStr[ index ] == " " then index -= 1 else exit
 					)
-					if  index>0 and _inStr[ index ]=="(" do _×óÀ¨ºÅÊýÁ¿+=1	
+					if  index>0 and _inStr[ index ]=="(" do _å·¦æ‹¬å·æ•°é‡+=1	
 				)	
 			)
 			_LastIsWord=Finditem _KeyWords (Fn_getWord _inStr pos:#R) > 0
@@ -156,7 +155,7 @@
 			while(not eof _myStringStream)do(
 				_inStr=readLine _myStringStream
 				if _inStr.count>0 do(
-					--Ìí¼ÓµÄÄÚÈÝ
+					--æ·»åŠ çš„å†…å®¹
 					_inStr=substituteString _inStr "%" "\%"
 					exit
 				)
@@ -165,7 +164,7 @@
 		free _myStringStream
 		close  _OutFile
 		Return True
-	)--º¯ÊýFn_MxsFormat
+	)--å‡½æ•°Fn_MxsFormat
 	---------------------------------------
 	Function Fn_getWord Str pos:#R = if str.count>0 then(
 		Local word="", c=""
