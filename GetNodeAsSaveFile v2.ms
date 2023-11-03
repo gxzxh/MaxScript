@@ -1,4 +1,4 @@
---±£´æÔ¤ÀÀÍ¼
+--ä¿å­˜é¢„è§ˆå›¾
 Function saveViewToPreview PreviewFileName = (
 	view_size = getViewSize()
 	_dib = gw.getViewportDib()
@@ -6,21 +6,21 @@ Function saveViewToPreview PreviewFileName = (
 	save _dib
 	close _dib
 )
---½«Ñ¡Ôñ¼¯±£´æÎªÎÄ¼ş£¬ÎÄ¼şÃûÓÉÇ°×ººÍÈÕÆÚ×é³É
-function saveSelToFile Â·¾¶ prefix sel = (
-	local ÈÕÆÚÊı×é = getLocalTime()
-	local ³¡¾°ÎÄ¼şÃû = pathConfig.appendPath Â·¾¶  (prefix + ÈÕÆÚÊı×é[1] as string + "_" + ÈÕÆÚÊı×é[2] as string + "_" + ÈÕÆÚÊı×é[4] as string + "_" + ÈÕÆÚÊı×é[5] as string + "_" + ÈÕÆÚÊı×é[6] as string + "_" + ÈÕÆÚÊı×é[7] as string + ".max")
-	saveNodes sel ³¡¾°ÎÄ¼şÃû quiet:true
-	return ³¡¾°ÎÄ¼şÃû
+--å°†é€‰æ‹©é›†ä¿å­˜ä¸ºæ–‡ä»¶ï¼Œæ–‡ä»¶åç”±å‰ç¼€å’Œæ—¥æœŸç»„æˆ
+function saveSelToFile è·¯å¾„ prefix sel = (
+	local æ—¥æœŸæ•°ç»„ = getLocalTime()
+	local åœºæ™¯æ–‡ä»¶å = pathConfig.appendPath è·¯å¾„  (prefix + æ—¥æœŸæ•°ç»„[1] as string + "_" + æ—¥æœŸæ•°ç»„[2] as string + "_" + æ—¥æœŸæ•°ç»„[4] as string + "_" + æ—¥æœŸæ•°ç»„[5] as string + "_" + æ—¥æœŸæ•°ç»„[6] as string + "_" + æ—¥æœŸæ•°ç»„[7] as string + ".max")
+	saveNodes sel åœºæ™¯æ–‡ä»¶å quiet:true
+	return åœºæ™¯æ–‡ä»¶å
 )
---µ÷Õûµ¥¸öÌùÍ¼×ÊÔ´µÄÂ·¾¶(º¬ÎÄ¼şÃû)
+--è°ƒæ•´å•ä¸ªè´´å›¾èµ„æºçš„è·¯å¾„(å«æ–‡ä»¶å)
 Function ModifyResourcePath src des = (
 	local _fileList = #(src)
 	ATSOps.clearSelection()
 	ATSOps.selectFiles &_fileList
 	ATSOps.retargetSelection des
 )
---¸üĞÂ×ÊÔ´Â·¾¶
+--æ›´æ–°èµ„æºè·¯å¾„
 Function updateAssetPath = (
 	TRY (
 		ATSOps.Visible=on
@@ -31,30 +31,30 @@ Function updateAssetPath = (
 	) CATCH()
 	ATSOps.Visible = off
 )
---»ñÈ¡½ÚµãÎÄ¼ş±£´æÂ·¾¶
+--è·å–èŠ‚ç‚¹æ–‡ä»¶ä¿å­˜è·¯å¾„
 Function getNodeSavePath = (
 	local _INI_FileName =getFilenamePath (getSourceFileName())+"getNodeAsSaveFile.ini"
 	local _node_Path = getINISetting _INI_FileName  "PATH"  "NodePath"
 	if _node_Path == "" then(
-		messageBox "Â·¾¶Îª¿Õ£¬ÇëÊÖ¶¯Ö¸¶¨Â·¾¶£¡"
-		_node_Path = getSavePath caption:"ÇëÊÖ¶¯Ö¸¶¨½ÚµãÎÄ¼ş±£´æµÄÂ·¾¶£¡"
+		messageBox "è·¯å¾„ä¸ºç©ºï¼Œè¯·æ‰‹åŠ¨æŒ‡å®šè·¯å¾„ï¼"
+		_node_Path = getSavePath caption:"è¯·æ‰‹åŠ¨æŒ‡å®šèŠ‚ç‚¹æ–‡ä»¶ä¿å­˜çš„è·¯å¾„ï¼"
 		if _node_Path == undefined then(
-			messageBox "Ö¸¶¨Â·¾¶Îª¿Õ£¬·ÅÆú±£´æ½áµã¡£"
+			messageBox "æŒ‡å®šè·¯å¾„ä¸ºç©ºï¼Œæ”¾å¼ƒä¿å­˜ç»“ç‚¹ã€‚"
 			return undefined
 		)
 		setINISetting _INI_FileName  "PATH"  "NodePath" _node_Path
-		messageBox ("ÈôÒªĞŞ¸Ä½ÚµãÎÄ¼ş±£´æÂ·¾¶£¬ÇëÉ¾³ıÅäÖÃÎÄ¼ş£º\n" + _INI_FileName)
+		messageBox ("è‹¥è¦ä¿®æ”¹èŠ‚ç‚¹æ–‡ä»¶ä¿å­˜è·¯å¾„ï¼Œè¯·åˆ é™¤é…ç½®æ–‡ä»¶ï¼š\n" + _INI_FileName)
 	)
 	return _node_Path
 )
--- »ñÈ¡Ñ¡¶¨¶ÔÏóÊ¹ÓÃµÄÌùÍ¼ÎÄ¼şÃû³Æ£¬´æÈë fileList ·µ»Ø
+-- è·å–é€‰å®šå¯¹è±¡ä½¿ç”¨çš„è´´å›¾æ–‡ä»¶åç§°ï¼Œå­˜å…¥ fileList è¿”å›
 Function getMapOfSelNode Sel &fileList=(
 	for obj in sel where obj.material != undefined do(
 		for theMap in usedMaps obj.material do
 			appendIfUnique filelist theMap
 	)
 )
---ÈôÎÄ¼ş´æÔÚ´ÅÅÌÉÏ£¬Ôòµ÷ÕûÎÄ¼şÃû²¢·µ»Ø
+--è‹¥æ–‡ä»¶å­˜åœ¨ç£ç›˜ä¸Šï¼Œåˆ™è°ƒæ•´æ–‡ä»¶åå¹¶è¿”å›
 Function getValidFileName _ValidFileName = (
 	local  _index = 1
 	local  _fileType = getFilenameType _ValidFileName
@@ -67,64 +67,64 @@ Function getValidFileName _ValidFileName = (
 )
 -----------------------------------------------------
 -----------------------------------------------------
-Function pack ³¡¾°ÎÄ¼şÃû ×ÊÔ´Â·¾¶ = (
-	local ³¡¾°ÎÄ¼şÂ·¾¶ = getFilenamePath ³¡¾°ÎÄ¼şÃû
-	local Ô¤ÀÀÍ¼Ãû = pathConfig.appendPath  ³¡¾°ÎÄ¼şÂ·¾¶  (getFilenameFile ³¡¾°ÎÄ¼şÃû + ".jpg")
-	local Ñ¹Ëõ°üÃû = pathConfig.appendPath  ³¡¾°ÎÄ¼şÂ·¾¶  (getFilenameFile ³¡¾°ÎÄ¼şÃû + ".zip")
-	saveViewToPreview Ô¤ÀÀÍ¼Ãû
-	--Ñ¹Ëõ°üÃû = "  \""  +  Ñ¹Ëõ°üÃû + "\""
-	×ÊÔ´Â·¾¶= "  \""  + ×ÊÔ´Â·¾¶ + "\""
-	Ô¤ÀÀÍ¼Ãû = "  \""  +  Ô¤ÀÀÍ¼Ãû + "\""
-	³¡¾°ÎÄ¼şÃû =  "  \""  + ³¡¾°ÎÄ¼şÃû + "\""
+Function pack åœºæ™¯æ–‡ä»¶å èµ„æºè·¯å¾„ = (
+	local åœºæ™¯æ–‡ä»¶è·¯å¾„ = getFilenamePath åœºæ™¯æ–‡ä»¶å
+	local é¢„è§ˆå›¾å = pathConfig.appendPath  åœºæ™¯æ–‡ä»¶è·¯å¾„  (getFilenameFile åœºæ™¯æ–‡ä»¶å + ".jpg")
+	local å‹ç¼©åŒ…å = pathConfig.appendPath  åœºæ™¯æ–‡ä»¶è·¯å¾„  (getFilenameFile åœºæ™¯æ–‡ä»¶å + ".zip")
+	saveViewToPreview é¢„è§ˆå›¾å
+	å‹ç¼©åŒ…å = "  \""  +  å‹ç¼©åŒ…å + "\""
+	èµ„æºè·¯å¾„= "  \""  + èµ„æºè·¯å¾„ + "\""
+	-- é¢„è§ˆå›¾å = "  \""  +  é¢„è§ˆå›¾å + "\""
+	åœºæ™¯æ–‡ä»¶å =  "  \""  + åœºæ™¯æ–‡ä»¶å + "\""
 	packCommand = pathConfig.appendPath (getFilenamePath (getSourceFileName())) "7z.exe  a  -tzip  -sdel -mx9"
-	--packCommand += Ñ¹Ëõ°üÃû
-	packCommand += ³¡¾°ÎÄ¼şÃû
-	packCommand += Ô¤ÀÀÍ¼Ãû
-	packCommand += ×ÊÔ´Â·¾¶
+	packCommand += å‹ç¼©åŒ…å
+	packCommand += åœºæ™¯æ–‡ä»¶å
+	-- packCommand += é¢„è§ˆå›¾å
+	packCommand += èµ„æºè·¯å¾„
 	HiddenDOSCommand packCommand
-	pushPrompt ("ÒÑÉú³É´ò°üÎÄ¼ş£º" + Ñ¹Ëõ°üÃû)	
+	pushPrompt ("å·²ç”Ÿæˆæ‰“åŒ…æ–‡ä»¶ï¼š" + å‹ç¼©åŒ…å)	
 )
---Ö÷º¯Êı
+--ä¸»å‡½æ•°
 Function getNodeAsSaveFile = (
 	local _selNode = getCurrentSelection()
 	if 0 == _selNode.count do(
-		messageBox "Î´Ñ¡ÔñÈÎºÎ¶ÔÏó£¬ÍË³ö¡£"
+		messageBox "æœªé€‰æ‹©ä»»ä½•å¯¹è±¡ï¼Œé€€å‡ºã€‚"
  		return undefined
  	)
- 	--»ñÈ¡½áµãÎÄ¼ş±£´æÂ·¾¶
+ 	--è·å–ç»“ç‚¹æ–‡ä»¶ä¿å­˜è·¯å¾„
 	local _node_Path = getNodeSavePath()
 	if _node_Path == undefined do return undefined
-	---¸üĞÂ×ÊÔ´Â·¾¶
+	---æ›´æ–°èµ„æºè·¯å¾„
 	updateAssetPath()
-	local ×ÊÔ´Â·¾¶ = pathConfig.appendPath _node_Path "Textures"
-	makedir ×ÊÔ´Â·¾¶
-	local ×ÊÔ´ÎÄ¼şÁĞ±í = #()
-	getMapOfSelNode _selNode &×ÊÔ´ÎÄ¼şÁĞ±í
-	-- ÊÕ¼¯´úÀíÎÄ¼ş
+	local èµ„æºè·¯å¾„ = pathConfig.appendPath _node_Path "Textures"
+	makedir èµ„æºè·¯å¾„
+	local èµ„æºæ–‡ä»¶åˆ—è¡¨ = #()
+	getMapOfSelNode _selNode &èµ„æºæ–‡ä»¶åˆ—è¡¨
+	-- æ”¶é›†ä»£ç†æ–‡ä»¶
 	for item in _selNode where isProperty item #fileName  do(
-		if item.fileName != "" do append  ×ÊÔ´ÎÄ¼şÁĞ±í item.fileName
+		if item.fileName != "" do append  èµ„æºæ–‡ä»¶åˆ—è¡¨ item.fileName
 		if isProperty item #fileNamePreview  and  item.fileNamePreview != "" do
-			append  ×ÊÔ´ÎÄ¼şÁĞ±í item.fileNamePreview
+			append  èµ„æºæ–‡ä»¶åˆ—è¡¨ item.fileNamePreview
 		if isProperty item #filenameeditbox    and  item.filenameeditbox  != "" do
-			append  ×ÊÔ´ÎÄ¼şÁĞ±í item.filenameeditbox
+			append  èµ„æºæ–‡ä»¶åˆ—è¡¨ item.filenameeditbox
 	)
 	local _arrForRecovery = #()
-	for item in ×ÊÔ´ÎÄ¼şÁĞ±í where item  !=  undefined  do(
-		local ĞÂÎÄ¼şÃû = (pathConfig.appendPath ×ÊÔ´Â·¾¶ (filenameFromPath item))
-		ĞÂÎÄ¼şÃû = getValidFileName ĞÂÎÄ¼şÃû
-		copyFile item ĞÂÎÄ¼şÃû
-		append _arrForRecovery #(item, ĞÂÎÄ¼şÃû)
+	for item in èµ„æºæ–‡ä»¶åˆ—è¡¨ where item  !=  undefined  do(
+		local æ–°æ–‡ä»¶å = (pathConfig.appendPath èµ„æºè·¯å¾„ (filenameFromPath item))
+		æ–°æ–‡ä»¶å = getValidFileName æ–°æ–‡ä»¶å
+		copyFile item æ–°æ–‡ä»¶å
+		append _arrForRecovery #(item, æ–°æ–‡ä»¶å)
 	)
-	--µ÷Õû×ÊÔ´Â·¾¶
+	--è°ƒæ•´èµ„æºè·¯å¾„
 	for item in _arrForRecovery do(
 		ModifyResourcePath item[1] item[2]
 	)
-	-- ±£´æ½Úµãµ½ÎÄ¼ş
-	local ³¡¾°ÎÄ¼şÃû = saveSelToFile _node_Path "/CGSAN_" _selNode
-	--»Ö¸´×ÊÔ´Â·¾¶
+	-- ä¿å­˜èŠ‚ç‚¹åˆ°æ–‡ä»¶
+	local åœºæ™¯æ–‡ä»¶å = saveSelToFile _node_Path "/CGSAN_" _selNode
+	--æ¢å¤èµ„æºè·¯å¾„
 	for item in _arrForRecovery do(
 		ModifyResourcePath item[2] item[1]
 	)
-	pack ³¡¾°ÎÄ¼şÃû ×ÊÔ´Â·¾¶
+	pack åœºæ™¯æ–‡ä»¶å èµ„æºè·¯å¾„
 )
 getNodeAsSaveFile()
